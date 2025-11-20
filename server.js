@@ -1,7 +1,7 @@
 const express = require('express');
+const Pusher = require('pusher');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const Pusher = require('pusher');
 const path = require('path');
 
 const app = express();
@@ -29,10 +29,10 @@ app.post('/message', (req, res) => {
   res.status(200).send("Message sent");
 });
 
-// Fallback to index.html for any route
+// Serve index.html for all other routes (SPA behavior)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Veilian Chat 10 running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Veilian Chat running on port ${PORT}`));
